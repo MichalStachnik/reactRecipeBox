@@ -1,0 +1,25 @@
+.modal {
+  position: absolute;
+  top: 10vh;
+  left: 10vw;
+  background: #333;
+  height: 30vh;
+  color: white;
+  width: 90vw;
+  text-align: center;
+}
+.modal label {
+  display: block;
+}
+.modal button {
+  display: block;
+  margin: 10px auto;
+}
+textarea {
+  resize: none;
+}
+
+.recipeList ul {
+  list-style-type: none;
+  padding: 0;
+}
