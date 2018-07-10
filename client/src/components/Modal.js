@@ -17,7 +17,8 @@ class Modal extends React.Component {
 
     const modalStyles = {
       transition: '0.2s all ease-in-out',
-      opacity: this.props.isOpen ? 1 : 0
+      opacity: this.props.isOpen ? 1 : 0,
+      zIndex: this.props.isOpen ? 10 : -10
     };
     
     return(
@@ -27,6 +28,7 @@ class Modal extends React.Component {
         <label>Ingredients: </label>
         <textarea ref="ingredients" type="text" />
         <button 
+          className="add"
           onClick={this.handleClick}
         >
           Add

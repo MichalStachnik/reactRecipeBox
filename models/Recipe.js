@@ -7,6 +7,10 @@ const recipeSchema = new Schema({
     type: String,
     required: true
   },
+  ingredients: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now

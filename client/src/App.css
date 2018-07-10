@@ -1,12 +1,41 @@
+body{
+  height: 100vh;
+  background: #182E38;
+  color: #F5F1D5;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+nav {
+  text-align: center;
+}
+.plus, .add {
+  padding: 20px;
+  border: 2px solid #F5F1D5;
+  outline: 0;
+  background: #B4D6C6;
+  cursor: pointer;
+  transition: .2s all ease-in-out;
+  color: #182E38;
+  font-size: 14px;
+  margin: 0 auto;
+  display: block;
+  margin-top: 20px;
+}
+.plus:hover, .add:hover {
+  border: 2px solid #B4D6C6;
+  background: #182E38;
+  color: #F5F1D5;
+}
 .modal {
   position: absolute;
   top: 10vh;
-  left: 10vw;
-  background: #333;
+  background: #B4D6C6;
   height: 30vh;
   color: white;
-  width: 90vw;
+  width: 50vw;
   text-align: center;
+  z-index: -10;
+  margin-left: 25vw;
+  margin-right: 25vw;
 }
 .modal label {
   display: block;
@@ -18,8 +47,44 @@
 textarea {
   resize: none;
 }
-
+.recipeList {
+  width: 60vw;
+  margin: 0 auto;
+}
 .recipeList ul {
   list-style-type: none;
   padding: 0;
+}
+
+.recipeList li {
+  border: 1px solid black;
+  background: #4A849F;
+  margin-top: 20px;
+}
+
+.recipeList div {
+  display: inline-block;
+}
+
+.leftCol {
+  width:20vw;
+  text-align: center;
+  position: relative;
+  top: -20px;
+}
+
+.leftCol button{
+  padding: 10px;
+  border: 2px solid #F5F1D5;
+  outline: 0;
+  background: #FF4D61;
+  cursor: pointer;
+  transition: .2s all ease-in-out;
+  color: #F5F1D5
+}
+
+.leftCol button:hover {
+  border: 2px solid #FF4D61;
+  background: #F5F1D5;
+  color: #FF4D61;
 }

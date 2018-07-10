@@ -30,6 +30,7 @@ class App extends Component {
 
   // Add a recipe
   handleAdd = (data) => {
+    console.log('DATA FROM HANDLEADD', data);
     this.setState({
       isModalOpen: false
     });
@@ -37,11 +38,15 @@ class App extends Component {
       name: data.name,
       ingredients: data.ingredients
     };
+    // Validate
+    if(newRecipe.name === '' || newRecipe.ingredients === '') return;
+
     let localArr = this.state.recipes;
     localArr.push(newRecipe);
     this.setState({
       recipes: localArr
     });
+    console.log('SENDING', newRecipe);
     // Send to server
     fetch('/recipes', {
       method: 'post',
@@ -65,7 +70,10 @@ class App extends Component {
       }
     })
       .then(res => res.json())
-      .then(res => console.log(res));
+      // .then(res => console.log(res));
+      .then(res => {
+        this.setState({recipes: res});
+      });
     
   }
 
@@ -73,7 +81,7 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        <button onClick={this.toggleModal}>+</button>
+        <button className="plus" onClick={this.toggleModal}>+</button>
         <Modal 
           isOpen={this.state.isModalOpen}
           onAdd={this.handleAdd}
