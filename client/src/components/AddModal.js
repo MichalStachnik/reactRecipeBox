@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Modal extends React.Component {
+class AddModal extends React.Component {
   
   handleClick = () => {
 
@@ -38,4 +38,4 @@ class Modal extends React.Component {
   }
 };
 
-export default Modal;
+export default AddModal;

@@ -3,7 +3,7 @@ import React from 'react';
 class RecipeList extends React.Component {
 
   handleClick = (id) => {
-    this.props.onDelete(id);
+    this.props.onEdit(id);
   }
   render() {
     return (
@@ -17,7 +17,7 @@ class RecipeList extends React.Component {
                   <button 
                     onClick={() => this.handleClick(recipe._id)}
                   >
-                  X
+                    <i className="far fa-edit"></i>
                   </button>
                 </div>
                 <div className="rightCol">

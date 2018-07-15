@@ -2,37 +2,56 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Navbar from './components/Navbar';
-import Modal from './components/Modal';
+import AddModal from './components/AddModal';
+import EditModal from './components/EditModal';
 import RecipeList from './components/RecipeList';
 
 class App extends Component {
 
   state = {
-    isModalOpen: false,
-    recipes: []
+    isAddModalOpen: false,
+    isEditModalOpen: false,
+    recipes: [],
+    editData: {}
   };
-  
-  componentWillMount = () => {
+  componentDidMount = () => {
     fetch('/recipes')
       .then(res => res.json())
       .catch(err => console.log(err))
       .then(data => {
-        console.log(data);
         this.setState({ recipes: data });
       });
   }
 
-  toggleModal = () => {
+  toggleAddModal = () => {
     this.setState({
-      isModalOpen: !this.state.isModalOpen
+      isAddModalOpen: !this.state.isAddModalOpen
+    });
+  }
+
+  toggleEditModal = (id) => {
+    
+    // Get and prepopulate edit fields
+    fetch(`/recipes/${id}`)
+      .then(res => res.json())
+      .catch(err => console.log(err))
+      .then(data => {
+        console.log(data);
+        this.setState({
+          editData: {...this.state.editData, data}
+        });
+      });
+
+
+    this.setState({
+      isEditModalOpen: !this.state.isEditModalOpen
     });
   }
 
   // Add a recipe
   handleAdd = (data) => {
-    console.log('DATA FROM HANDLEADD', data);
     this.setState({
-      isModalOpen: false
+      isAddModalOpen: false
     });
     const newRecipe = {
       name: data.name,
@@ -41,12 +60,9 @@ class App extends Component {
     // Validate
     if(newRecipe.name === '' || newRecipe.ingredients === '') return;
 
-    let localArr = this.state.recipes;
-    localArr.push(newRecipe);
     this.setState({
-      recipes: localArr
+      recipes: [...this.state.recipes, newRecipe]
     });
-    console.log('SENDING', newRecipe);
     // Send to server
     fetch('/recipes', {
       method: 'post',
@@ -57,12 +73,10 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(res => console.log(res));
-
   }
 
   // Delete a recipe
   handleDelete = (recipe) => {
-
     fetch(`/recipes/${recipe}`, {
       method: 'delete',
       headers: {
@@ -70,25 +84,31 @@ class App extends Component {
       }
     })
       .then(res => res.json())
-      // .then(res => console.log(res));
       .then(res => {
-        this.setState({recipes: res});
+        this.setState({
+          recipes: res,
+          isEditModalOpen: false
+        });
       });
-    
   }
 
   render() {
     return (
       <div>
         <Navbar />
-        <button className="plus" onClick={this.toggleModal}>+</button>
-        <Modal 
-          isOpen={this.state.isModalOpen}
+        <button className="plus" onClick={this.toggleAddModal}><i className="fas fa-plus"></i></button>
+        <AddModal 
+          isOpen={this.state.isAddModalOpen}
           onAdd={this.handleAdd}
+        />
+        <EditModal
+          isOpen={this.state.isEditModalOpen}
+          editData={this.state.editData}
+          onDelete={this.handleDelete} 
         />
         <RecipeList
           recipes={this.state.recipes}
-          onDelete={this.handleDelete}
+          onEdit={this.toggleEditModal}
         />
       </div>
     );
