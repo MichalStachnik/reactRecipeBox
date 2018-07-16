@@ -18,6 +18,7 @@ router.get('/:id', (req, res) => {
     .catch(err => console.log(err));
 });
 
+// Create a recipe
 router.post('/', (req, res) => {
   const newRecipe = new Recipe({
     name: req.body.name,
@@ -28,16 +29,28 @@ router.post('/', (req, res) => {
     .catch(err => console.log(err));
 });
 
+// Update a recipe
+router.patch('/:id', (req, res) => {
+  Recipe.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, ingredients: req.body.ingredients } })
+    .then(data => {
+      Recipe.find()
+        .sort({ date: -1 })
+        .then(recipes => res.json(recipes))
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+});
+
 
 router.delete('/:id', (req, res) => {
 
   Recipe.findById(req.params.id)
     .then(recipe => recipe.remove()
-      // .then(() => res.json({ removed: true })))
       .then(() => {
         Recipe.find()
           .sort({ date: -1 })
-          .then(recipes => res.json(recipes));
+          .then(recipes => res.json(recipes))
+          .catch(err => console.log(err));
       }))
     .catch(err => console.log(err));
 

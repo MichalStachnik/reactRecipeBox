@@ -24,9 +24,9 @@ class AddModal extends React.Component {
     return(
       <div className="modal" style={modalStyles}>
         <label>Name: </label>
-        <input ref="name" type="text" />
+        <input ref="name" className="inputBox" type="text" />
         <label>Ingredients: </label>
-        <textarea ref="ingredients" type="text" />
+        <textarea ref="ingredients" className="inputBox" type="text" />
         <button 
           className="add"
           onClick={this.handleClick}

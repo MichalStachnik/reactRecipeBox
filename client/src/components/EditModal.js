@@ -2,11 +2,37 @@ import React from 'react';
 
 class EditModal extends React.Component {
   
-  handleSave = () => {
-
+  state = {
+    editName: '',
+    editIngredients: ''
   }
+  componentDidUpdate = (prevProps) => {
+    if(this.props !== prevProps){
+      this.setState({
+        editName: this.props.editData.data ? this.props.editData.data.name : '',
+        editIngredients: this.props.editData.data ? this.props.editData.data.ingredients : ''
+      });
+    }
+  }
+
+  handleSave = (id) => {
+    const recipe = {
+      name: this.refs.editName.value,
+      ingredients: this.refs.editIngredients.value
+    }
+    this.props.onSaveEdit(recipe, id);
+    this.refs.editName.value = '';
+    this.refs.editIngredients.value = '';
+  }
+
   handleDelete = (id) => {
     this.props.onDelete(id);
+  }
+
+  onInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   render() {
@@ -15,18 +41,29 @@ class EditModal extends React.Component {
       opacity: this.props.isOpen ? 1 : 0,
       zIndex: this.props.isOpen ? 10 : -10
     };
-    console.log(this.props);
-    let editName = this.props.editData.data ? this.props.editData.data.name : '';
     let currentId = this.props.editData.data ? this.props.editData.data._id : '';
-    let editIngredients = this.props.editData.data ? this.props.editData.data.ingredients : '';
     return(
       <div className="modal" style={modalStyles}>
         <label>Name: </label>
-        <input ref="name" type="text" value={editName}/>
+        <input 
+          name="editName" 
+          ref="editName" 
+          className="inputBox" 
+          type="text" 
+          onChange={this.onInputChange} 
+          value={this.state.editName}
+        />
         <label>Ingredients: </label>
-        <textarea ref="ingredients" type="text" value={editIngredients}/>
+        <textarea 
+          name="editIngredients" 
+          ref="editIngredients" 
+          className="inputBox" 
+          type="text" 
+          onChange={this.onInputChange} 
+          value={this.state.editIngredients}
+        />
         <button 
-          onClick={this.handleSave}
+          onClick={() => this.handleSave(currentId)}
         >
           <i className="far fa-save"></i>
         </button>

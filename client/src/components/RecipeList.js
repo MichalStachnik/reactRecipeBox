@@ -15,6 +15,7 @@ class RecipeList extends React.Component {
               <li key={recipe._id}>
                 <div className="leftCol">
                   <button 
+                    className="editButton"
                     onClick={() => this.handleClick(recipe._id)}
                   >
                     <i className="far fa-edit"></i>

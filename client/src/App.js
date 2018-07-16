@@ -30,19 +30,15 @@ class App extends Component {
   }
 
   toggleEditModal = (id) => {
-    
-    // Get and prepopulate edit fields
+    // Get and pre-populate edit fields
     fetch(`/recipes/${id}`)
       .then(res => res.json())
       .catch(err => console.log(err))
       .then(data => {
-        console.log(data);
         this.setState({
           editData: {...this.state.editData, data}
         });
       });
-
-
     this.setState({
       isEditModalOpen: !this.state.isEditModalOpen
     });
@@ -92,9 +88,48 @@ class App extends Component {
       });
   }
 
+  // Save an edit
+  handleSaveEdit = (recipe, id) => {
+    const editedRecipe = {
+      name: recipe.name,
+      ingredients: recipe.ingredients
+    };
+    fetch(`/recipes/${id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"       
+      },
+      body: JSON.stringify(editedRecipe)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ 
+          isEditModalOpen: false,
+          recipes: data
+        });
+      });
+  }
+
+  handleModalClose = (e) => {
+    if(
+      e.target.className !== 'editButton' && 
+      e.target.className !== 'far fa-edit' && 
+      e.target.className !== 'plus' && 
+      e.target.className !== 'fas fa-plus' &&
+      e.target.className !== 'modal' &&
+      e.target.className !== 'inputBox'
+    ){
+      this.setState({
+        isAddModalOpen: false,
+        isEditModalOpen: false
+      });
+    }
+  }
+
   render() {
     return (
-      <div>
+      <div onClick={(e) => this.handleModalClose(e)}>
         <Navbar />
         <button className="plus" onClick={this.toggleAddModal}><i className="fas fa-plus"></i></button>
         <AddModal 
@@ -105,6 +140,7 @@ class App extends Component {
           isOpen={this.state.isEditModalOpen}
           editData={this.state.editData}
           onDelete={this.handleDelete} 
+          onSaveEdit={this.handleSaveEdit}
         />
         <RecipeList
           recipes={this.state.recipes}
