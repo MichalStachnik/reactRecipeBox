@@ -17,7 +17,7 @@ class Navbar extends React.Component {
   render() {
     return(
       <nav>
-        react Recipe Box
+        Recipe Box
       </nav>
     )
   }
