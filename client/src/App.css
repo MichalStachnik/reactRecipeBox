@@ -1,7 +1,16 @@
+:root {
+  --primary: #4A849F;
+  --secondary: #B4D6C6;
+  --border: #F5F1D5;
+  --background: #182E38;
+  --red: #FF4D61;
+  --yellow: #FEDD55;
+}
+
 body{
   height: 100vh;
-  background: #182E38;
-  color: #F5F1D5;
+  background: var(--background);
+  color: var(--border);
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 nav {
@@ -9,26 +18,26 @@ nav {
 }
 .plus, .add {
   padding: 20px;
-  border: 2px solid #F5F1D5;
+  border: 2px solid var(--secondary);
   outline: 0;
-  background: #B4D6C6;
+  background: var(--secondary);
   cursor: pointer;
   transition: .2s all ease-in-out;
-  color: #182E38;
+  color: var(--background);
   font-size: 14px;
   margin: 0 auto;
   display: block;
   margin-top: 20px;
 }
 .plus:hover, .add:hover {
-  border: 2px solid #B4D6C6;
-  background: #182E38;
-  color: #F5F1D5;
+  border: 2px solid var(--secondary);
+  background: var(--background);
+  color: var(--border);
 }
 .modal {
   position: absolute;
   top: 10vh;
-  background: #B4D6C6;
+  background: var(--secondary);
   height: 30vh;
   color: white;
   width: 50vw;
@@ -36,55 +45,113 @@ nav {
   z-index: -10;
   margin-left: 25vw;
   margin-right: 25vw;
+  border: 1px solid var(--border);
 }
 .modal label {
   display: block;
 }
-.modal button {
+.modal .inputBox {
   display: block;
+  margin: 0 auto;
+}
+.modal button {
+  display: inline-block;
   margin: 10px auto;
 }
+
+.modal button:nth-of-type(1){
+  padding: 10px;
+  border: 2px solid var(--yellow);
+  border-radius: 2px;
+  outline: 0;
+  background: var(--yellow);
+  cursor: pointer;
+  transition: .2s all ease-in-out;
+  color: var(--background);
+  margin-right: 1vw;
+  font-size: 14px;
+}
+
+.modal button:nth-of-type(1):hover {
+  border: 2px solid var(--yellow);
+  background: var(--background);
+  color: var(--yellow);
+}
+
+.modal button:nth-of-type(2){
+  padding: 10px;
+  border: 2px solid var(--red);
+  border-radius: 2px;
+  outline: 0;
+  background: var(--red);
+  cursor: pointer;
+  transition: .2s all ease-in-out;
+  color: var(--background);
+  margin-left: 1vw;
+  font-size: 14px;
+}
+
+.modal button:nth-of-type(2):hover {
+  border: 2px solid var(--red);
+  background: var(--background);
+  color: var(--red);
+}
+.modal label {
+  color: var(--background);
+}
+
 textarea {
   resize: none;
 }
 .recipeList {
-  width: 60vw;
+  width: 70vw;
   margin: 0 auto;
 }
 .recipeList ul {
   list-style-type: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1vw;
 }
 
 .recipeList li {
-  border: 1px solid black;
-  background: #4A849F;
-  margin-top: 20px;
+  border: 1px solid var(--border);
+  background: var(--primary);
+  margin-top: 10px;
 }
 
 .recipeList div {
   display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5vw;
 }
 
-.leftCol {
+.card-top {
+  text-align: center;
+  height: 130px;
+}
+
+.card-bottom {
   width:20vw;
   text-align: center;
-  position: relative;
-  top: -20px;
 }
 
-.leftCol button{
+.card-bottom button{
   padding: 10px;
-  border: 2px solid #F5F1D5;
+  border: 2px solid var(--background);
+  border-radius: 2px;
   outline: 0;
-  background: #FF4D61;
+  background: var(--background);
   cursor: pointer;
   transition: .2s all ease-in-out;
-  color: #F5F1D5
+  color: var(--border);
+  font-size: 14px;
 }
 
-.leftCol button:hover {
-  border: 2px solid #FF4D61;
-  background: #F5F1D5;
-  color: #FF4D61;
+.card-bottom button:hover {
+  border: 2px solid var(--background);
+  background: var(--border);
+  color: var(--background);
 }

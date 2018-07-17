@@ -13,18 +13,18 @@ class RecipeList extends React.Component {
             this.props.recipes.map(recipe => {
             return (
               <li key={recipe._id}>
-                <div className="leftCol">
+                <div className="card-top">
+                  <h3>{recipe.name}</h3>
+                  <p>{recipe.ingredients}</p>
+                </div>
+                <div className="card-bottom">
                   <button 
                     className="editButton"
                     onClick={() => this.handleClick(recipe._id)}
                   >
                     <i className="far fa-edit"></i>
                   </button>
-                </div>
-                <div className="rightCol">
-                  <h3>{recipe.name}</h3>
-                  <p>{recipe.ingredients}</p>
-                </div>
+              </div>
               </li>
             );
           }) 
