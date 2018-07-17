@@ -1,3 +1,5 @@
+//TODO: Add menu sidebar with search filter
+
 import React, { Component } from 'react';
 import './App.css';
 
