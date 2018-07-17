@@ -5,6 +5,7 @@
   --background: #182E38;
   --red: #FF4D61;
   --yellow: #FEDD55;
+  --salmon: #e9967a;
 }
 
 body{
@@ -111,7 +112,7 @@ textarea {
   list-style-type: none;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   grid-gap: 1vw;
 }
 
@@ -119,6 +120,10 @@ textarea {
   border: 1px solid var(--border);
   background: var(--primary);
   margin-top: 10px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 230px;
 }
 
 .recipeList div {
@@ -154,4 +159,14 @@ textarea {
   border: 2px solid var(--background);
   background: var(--border);
   color: var(--background);
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-decoration: underline;
+  line-height: 25px;
+  background: var(--salmon);
+  border-radius: 2px;
+  padding: 5px 0;
+  height: 50px;
 }
