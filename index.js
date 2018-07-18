@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const recipes = require('./routes/recipes');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -17,6 +18,7 @@ mongoose.connect(db)
 
 
 app.use('/recipes', recipes);
+app.use('/auth', auth);
 
 if(process.env.NODE_ENV === 'production') {
 
