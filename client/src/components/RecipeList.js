@@ -18,13 +18,15 @@ class RecipeList extends React.Component {
                   <p>{recipe.ingredients}</p>
                 </div>
                 <div className="card-bottom">
-                  <button 
+                  { this.props.isToken ?  
+                    <button 
                     className="editButton"
                     onClick={() => this.handleClick(recipe._id)}
-                  >
-                    <i className="far fa-edit"></i>
-                  </button>
-              </div>
+                    >
+                      <i className="far fa-edit"></i>
+                    </button> : ''
+                  }
+                </div>
               </li>
             );
           }) 

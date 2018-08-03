@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+const passport = require('passport');
 
 const recipes = require('./routes/recipes');
 const auth = require('./routes/auth');
@@ -16,6 +17,9 @@ mongoose.connect(db)
   .then(() => console.log('mongo database connected'))
   .catch(err => console.log(err));
 
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 app.use('/recipes', recipes);
 app.use('/auth', auth);

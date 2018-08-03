@@ -1,3 +1,6 @@
-module.exports = {
-  mongoURI: 'mongodb://mstachnik:password123@ds123171.mlab.com:23171/msrecipebox'
+if(process.env.NODE_ENV === 'production') {
+  module.exports = require('./keys_prod');
+}
+else {
+  module.exports = require('./keys_dev');
 }

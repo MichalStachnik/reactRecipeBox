@@ -2,24 +2,36 @@ import React from 'react';
 
 class Navbar extends React.Component {
    
-  // because we took care of this binding we don't need a constructor
-  // with an arrow function
-  state = {
-    isOpen: false
+  handleRegisterClick = () => {
+    this.props.onToggleRegisterModal(); 
   }
 
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  handleLogInClick = () => {
+    this.props.onToggleLogInModal();
   }
 
   render() {
-    return(
-      <nav>
-        Recipe Box
-      </nav>
-    )
+    if(this.props.username) {
+      return (
+        <nav>
+          <h2>Recipe Box</h2>
+          <h4>welcome back {this.props.username}</h4>
+        </nav>
+      );
+    }
+    else {
+      return (
+        <nav>
+          <h2>Recipe Box</h2>
+          <p onClick={this.handleRegisterClick} className="register">
+            Register
+          </p>
+          <p onClick={this.handleLogInClick} className="logIn">
+            Log In
+          </p>
+        </nav>
+      )
+    }
   }
 };
 

@@ -174,3 +174,31 @@ h3 {
   padding: 5px 0;
   height: 50px;
 }
+
+nav h2, nav h4, nav p {
+  display: inline-block;
+}
+
+nav h2, nav h4 {
+  position: relative;
+  top: -3vh; 
+}
+nav h2 {
+  left: -20vw;
+}
+
+nav p {
+  margin-right: 2px;
+  margin-left: 2px;
+  color: var(--border);
+  padding: 10px;
+  position: relative;
+  top: -3vh;
+  right: -20vw;
+  cursor: pointer;
+  transition: .2s all ease-in-out;
+}
+nav p:hover {
+  color: var(--primary);
+  background: var(--border);
+}
